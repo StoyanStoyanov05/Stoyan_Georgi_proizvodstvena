@@ -12,12 +12,12 @@ typedef struct
 	float balance;
 }DATA;
 
-typedef struct transaction {
+/*typedef struct transaction {
     int type;
     float amount;
     int account_num;
     struct transaction* next;
-} trs;
+} trs;*/
 
 DATA *readInfo(char *filename,DATA *D,int *broi);
 void writeInfo(char *filename,DATA *D,int *broi);
@@ -244,23 +244,27 @@ void withdraw(DATA *D,int num)
     if(D[num].balance>=amount){
         D[num].balance=D[num].balance - amount;
         printf("Uspeshno teglene. Balance: %.2f\n", D[num].balance);
+        printf("Natisnete klavish za prodyljenie!");
+        getch();
         return;
     }else{
         printf("Nedostatuchna nalichnost. Tegleneto e otkazano.\n");
+        printf("Natisnete klavish za prodyljenie!");
+        getch();
         return;
     }
-    printf("Tozi user ne beshe nameren. Tegleneto e otkazano.\n");
 }
 
 void deposit(DATA *D, int num)
  {
-    float amount=20.23;
+    float amount;
     printf("Vuvedete suma za deposit: ");
     scanf("%f",&amount);
     D[num].balance=D[num].balance + amount;
     printf("Uspeshen deposit. Balance: %.2f \n", D[num].balance);
+    printf("Natisnete klavish za prodyljenie!");
+    getch();
     return;
-    printf("Tozi user ne beshe nameren. Deposita e otkazan.\n");
 }
 void transfer(DATA *D, int num)
  {
@@ -268,19 +272,24 @@ void transfer(DATA *D, int num)
     float amount;
     printf("Vuvedete nomer na smetka na poluchatel: ");//trqbva proverka za poluchatel
     scanf("%d",&pnum);
-    //if(pnum>){
+    //if(D[pnum]==nullptr){
         printf("Vuvedete suma za transfer: ");
         scanf("%f",&amount);
         if(D[num].balance<amount){
             printf("Nedostatuchna nalichnost. Transferat e otkazan.\n");
+            printf("Natisnete klavish za prodyljenie!");
+            getch();
             return;
         }
         D[num].balance=D[num].balance - amount;
         D[pnum].balance=D[pnum].balance + amount;
         printf("Uspeshen transfer. Balance: %.2f\n", D[num].balance);
+        getch();
     /*}else{
         printf("Tozi user ne beshe nameren. Transferat e otkazan.\n");
     }*/
+    printf("Natisnete klavish za prodyljenie!");
+    getch();
     return;
 }
 
